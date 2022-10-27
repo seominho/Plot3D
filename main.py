@@ -9,7 +9,7 @@ tickvals_x = [1, 3, 5]
 ticktxt_y = ["Ag", "Mf", "Mn", "Co", "Co-Neo", "Co-Fold", "Hc", "Df", "Sp"]
 tickvals_y = [1, 2, 3, 4, 4+2/3, 4+4/3, 6, 7, 8]
 
-ticktxt_z = ["Sw", "Ro", "Ro-Serv", "Ro-Const", "Ro-AuoL", "AI", "3p", "Qt"]
+ticktxt_z = ["Sw", "Ro", "Ro-Serv", "Ro-Const", "Ro-AutoL", "AI", "3p", "Qt"]
 tickvals_z = [1, 2, 2+2/4, 2+4/4, 2+6/4, 4, 5, 6]
 
 # default origin axis line
@@ -25,7 +25,7 @@ COMBINATION_LIST = [dict(x="Ma", y="Mf", z="Ro", n="AMR"),
                     dict(x="Ma", y="Hc", z="Sw", n="Silicon")]
 
 def points_lst2(x,y,z):
-    temp_length = 0.14
+    temp_length = 0.15
     temp_point = np.array(x+y+z) # x,y,z should be list
     temp_xdir = np.array([temp_length, 0, 0])
     temp_ydir = np.array([0, temp_length, 0])
@@ -171,6 +171,7 @@ fig.update_layout(scene = dict(
         showbackground = True,
         ticktext = ticktxt_x,
         tickvals = tickvals_x,
+        tickfont = dict(color='blue', size=11)
     ),
     yaxis = dict(
         title_text = "Field",
@@ -179,7 +180,8 @@ fig.update_layout(scene = dict(
         # backgroundcolor = "gray",
         showbackground = True,
         ticktext = ticktxt_y,
-        tickvals = tickvals_y
+        tickvals = tickvals_y,
+        tickfont = dict(color='red', size=11)
     ),
     zaxis = dict(
         title_text = "Method",
@@ -188,9 +190,11 @@ fig.update_layout(scene = dict(
         # backgroundcolor = "gray",
         showbackground = True,
         ticktext = ticktxt_z,
-        tickvals = tickvals_z
+        tickvals = tickvals_z,
+        tickfont = dict(color='green', size=11)
     ),
 ))
 
 # Plot on streamlit
 st.plotly_chart(fig, use_container_width=False)
+# fig.show()
