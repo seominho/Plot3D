@@ -2,14 +2,17 @@ import plotly.graph_objects as go
 import numpy as np
 import streamlit as st
 
+title_font_size = 25
+tick_font_size = 11
+
 # each axis value and position list
 ticktxt_x = ["Ma", "Dt", "So"]
 tickvals_x = [1, 3, 5]
 
-ticktxt_y = ["Ag", "Mf", "Mn", "Co", "Co-Neo", "Co-Fold", "Hc", "Df", "Sp"]
+ticktxt_y = ["Ag", "Mf", "Mn", "Co", "Co_Neo", "Co_Fold", "Hc", "Df", "Sp"]
 tickvals_y = [1, 2, 3, 4, 4+2/3, 4+4/3, 6, 7, 8]
 
-ticktxt_z = ["Sw", "Ro", "Ro-Serv", "Ro-Const", "Ro-AutoL", "AI", "3p", "Qt"]
+ticktxt_z = ["Sw", "Ro", "Ro_Serv", "Ro_Const", "Ro_AutoML", "AI", "3p", "Qt"]
 tickvals_z = [1, 2, 2+2/4, 2+4/4, 2+6/4, 4, 5, 6]
 
 # default origin axis line
@@ -158,42 +161,49 @@ for ind, tmp_value in enumerate(tmp_f_lst):
 
 fig.update_layout(
     showlegend=False,
-    width = 1200,
+    width = 1500,
     height = 1200,
+    scene_aspectmode='cube',
 )
 
 fig.update_layout(scene = dict(
     xaxis = dict(
+        # autorange = True,
         title_text = "Substance",
-        title_font = dict(color='blue', size=20),
+        title_font = dict(color='blue', size=title_font_size,),
         backgroundcolor = "rgb(153, 153, 153)",
-        # backgroundcolor = "gray",
         showbackground = True,
         ticktext = ticktxt_x,
         tickvals = tickvals_x,
-        tickfont = dict(color='blue', size=11)
+        tickfont = dict(color='blue', size=tick_font_size),
+        # tickangle = 45
     ),
     yaxis = dict(
+        # autorange = True,
         title_text = "Field",
-        title_font = dict(color="red", size=20),
+        title_font = dict(color="red", size=title_font_size),
         backgroundcolor = "rgb(153, 153, 153)",
         # backgroundcolor = "gray",
         showbackground = True,
         ticktext = ticktxt_y,
         tickvals = tickvals_y,
-        tickfont = dict(color='red', size=11)
+        tickfont = dict(color='red', size=tick_font_size),
+        # tickangle = 45
     ),
     zaxis = dict(
+        # autorange = True,
         title_text = "Method",
-        title_font = dict(color="green", size=20),
+        title_font = dict(color="green", size=title_font_size),
         backgroundcolor = "rgb(153, 153, 153)",
         # backgroundcolor = "gray",
         showbackground = True,
         ticktext = ticktxt_z,
         tickvals = tickvals_z,
-        tickfont = dict(color='green', size=11)
+        tickfont = dict(color='green', size=tick_font_size),
+        # tickangle = 45
     ),
 ))
+
 
 # Plot on streamlit
 st.plotly_chart(fig, use_container_width=False)
